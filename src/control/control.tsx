@@ -1,31 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import s from './control.module.css'
 
 export const Control = () => {
 
-  function Counter(){
-    let i = 0;
-    return function(){
-      return i++;
-    };
-  };
-
-
+  let [counter, setCounter] = useState(0)
 
   return (
     <div className={s.wrapper}>
       <div className={s.form__top}>
         <div className={s.count}>
-          0
+          {counter}
         </div>
       </div>
       <div className={s.form__bottom}>
-        <button onClick={()=>{
-          console.log(Counter())}} className={s.inc}>
+        <button className={s.inc} onClick={() => {
+          setCounter((c) => c + 1)
+        }}>
           inc
         </button>
-        <button onClick={()=>{
-          console.log('reset')}} className={s.reset}>
+        <button className={s.reset} onClick={() => {
+          setCounter((c) => 0)
+        }}>
           reset
         </button>
       </div>
