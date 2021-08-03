@@ -13,7 +13,6 @@
   width: 320px;
   height: 120px;
 
-  color: #484d53;
   font-size: 55px;
   font-weight: 700;
   line-height: 120px;
@@ -23,7 +22,16 @@
 }
 
 .count {
+  color: #484d53;
   vertical-align: middle;
+}
+
+.active__start {
+  color: yellow;
+}
+
+.active__end {
+  color: lime;
 }
 
 .form__bottom {
@@ -32,7 +40,6 @@
 
   width: 316px;
   height: 80px;
-
 
   border: 3px solid chocolate;
   border-radius: 5px;
@@ -43,7 +50,7 @@
   width: 100px;
   height: 40px;
 
-  margin: auto ;
+  margin: auto;
   cursor: pointer;
 
   font-size: 24px;
@@ -67,6 +74,22 @@
   color: #484d53;
 
   background-color: chocolate;
+  border-radius: 5px;
+  border: none;
+}
+
+.button__disable {
+  width: 100px;
+  height: 40px;
+
+  margin: auto;
+  cursor: pointer;
+
+  font-size: 24px;
+  font-weight: 700;
+  color: #484d53;
+
+  background-color: red;
   border-radius: 5px;
   border: none;
 }

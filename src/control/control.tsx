@@ -8,19 +8,23 @@ export const Control = () => {
   return (
     <div className={s.wrapper}>
       <div className={s.form__top}>
-        <div className={s.count}>
+        <div className={counter === 0 ? s.active__start : s.count && counter === 5 ? s.active__end : s.count}>
           {counter}
         </div>
       </div>
       <div className={s.form__bottom}>
-        <button className={s.inc} onClick={() => {
-          setCounter((c) => c + 1)
-        }}>
+        <button disabled={counter === 5}
+                className={counter === 5 ? s.button__disable :s.inc}
+                onClick={() => {
+                  setCounter((c) => c + 1)
+                }}>
           inc
         </button>
-        <button className={s.reset} onClick={() => {
-          setCounter((c) => 0)
-        }}>
+        <button disabled={counter === 0}
+                className={counter === 0 ? s.button__disable :s.reset}
+                onClick={() => {
+                  setCounter((c) => 0)
+                }}>
           reset
         </button>
       </div>
