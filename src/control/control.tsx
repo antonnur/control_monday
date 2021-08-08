@@ -13,13 +13,23 @@ export const Control = () => {
         </div>
       </div>
       <div className={s.form__bottom}>
-        <button disabled={counter === 5}
-                className={counter === 5 ? s.button__disable :s.inc}
-                onClick={() => {
+        {/*<button disabled={counter === 5}*/}
+        {/*        className={counter === 5 ? s.button__disable :s.inc}*/}
+        {/*        onClick={() => {*/}
+        {/*          setCounter((c) => c + 1)*/}
+        {/*        }}>*/}
+        {/*  inc*/}
+        {/*</button>*/}
+
+        <div   className={counter === 5 ? s.button__disable :s.inc}
+              onClick={() => {
+                if(counter < 5) {
                   setCounter((c) => c + 1)
-                }}>
+                }
+              }}>
           inc
-        </button>
+        </div>
+
         <button disabled={counter === 0}
                 className={counter === 0 ? s.button__disable :s.reset}
                 onClick={() => {
