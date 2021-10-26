@@ -1,11 +1,15 @@
 import React from 'react';
 import './App.css';
-import {Control} from "./control/control";
+import {Counter} from "./counter/counter";
+import {CounterValue} from "./counter-value/counter-value";
 
 function App() {
   return (
     <div className="App">
-      <Control/>
+      <div className="container">
+        <CounterValue/>
+        <Counter/>
+      </div>
     </div>
   );
 }
