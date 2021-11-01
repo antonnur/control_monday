@@ -3,7 +3,7 @@ import s from './counter.module.css'
 
 export const Counter = () => {
 
-  let [counter, setCounter] = useState(0)
+  let [counter, setCounter] = useState<number>(0)
 
   return (
 
