@@ -1,53 +1,70 @@
-import React, {useState} from "react";
+import React, {FC, useState} from "react";
 import s from './counter.module.css'
+import {Button} from "../button/button";
 
-export const Counter = () => {
+type PropsType = {
+  counter: number   //startValue
+  setCounter: (value: number) => void
+  maxValue: number
+  startValue: number
+  error: string | null
+  isCounter: boolean;
+}
 
-  let [counter, setCounter] = useState<number>(0)
+export const Counter: FC<PropsType> = (props) => {
+  const {counter, maxValue, setCounter, startValue, error, isCounter} = props;
+
+  /*if (!isCounter) {
+    return <div>Нажнимте кнопку set</div>
+  }*/
 
   return (
-
     <div className={s.wrapper__right}>
       <div className={s.form__top}>
-        <div className={counter === 0 ? s.active__start : s.count && counter === 5 ? s.active__end : s.count}>
-          {counter}
+        <div className={error !== null || !isCounter ? s.error : counter === maxValue ? s.active__end : s.active__start }>
+          {error ? error : !isCounter ? <span className={s.is__counter}>Нажнимте кнопку set!</span> : counter}
         </div>
       </div>
       <div className={s.form__bottom}>
-
-        {/* <button disabled={counter === 5}
-                className={counter === 5 ? s.button__disable :s.inc}
+        <div className={s.button__inc}>
+          <Button disabled={!!error || counter === maxValue || !isCounter}
+                  onClick={() => {
+                    if (counter < maxValue) {
+                      setCounter(counter + 1)
+                    }
+                  }}>
+            inc
+          </Button>
+        </div>
+        {/*<button className={counter === maxValue ? s.button__disable : s.inc}
+                disabled={error ? true : false}
                 onClick={() => {
-                  setCounter((c) => c + 1)
+                  if (counter < maxValue) {
+                    setCounter(counter + 1)
+                  }
                 }}>
           inc
         </button>*/}
-
-        <div className={counter === 5 ? s.button__disable : s.inc}
-             onClick={() => {
-               if (counter < 5) {
-                 setCounter((c) => c + 1)
-               }
-             }}>
-          inc
+        <div className={s.button__reset}>
+          <Button disabled={error ? true : false || !isCounter}
+                  onClick={() => {
+                    if (counter <= maxValue) {
+                      setCounter(startValue)
+                    }
+                  }}>
+            reset
+          </Button>
         </div>
-
-        {/*<button disabled={counter === 0}
-                className={counter === 0 ? s.button__disable :s.reset}
+        {/*<button className={s.reset}
+                disabled={error ? true : false}
                 onClick={() => {
-                  setCounter((c) => 0)
+                  if (counter <= maxValue) {
+                    setCounter(startValue)
+                  }
                 }}>
           reset
         </button>*/}
 
-        <div className={counter === 0 ? s.button__disable : s.reset}
-             onClick={() => {
-               if (counter > 0) {
-                 setCounter((c) => 0)
-               }
-             }}>
-          reset
-        </div>
       </div>
     </div>
   )

@@ -1,21 +1,67 @@
-import React, {useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import s from './counter-value.module.css'
+import {Counter} from "../counter/counter";
+import {Button} from "../button/button";
 
-export const CounterValue = () => {
+type PropsType = {
+  maxValue: number
+  setMaxValue: (value: number) => void
+  startValue: number
+  setStartValue: (value: number) => void
+  counter: number
+  setCounter: (value: number) => void
+  setIsCounter: (value: boolean) => void
+  setError: (value: string | null) => void
+}
 
-  const [maxValue, setMaxValue] = useState<number>(0)
-  const [startValue, setStartValue] = useState<number>(0)
+export const CounterValue: React.FC<PropsType> = ({startValue, maxValue, setMaxValue, setStartValue, setCounter, counter, setIsCounter, setError}) => {
 
   useEffect(() => {
-    localStorage.setItem('counterValue', JSON.stringify(maxValue))
-  }, [maxValue])
+    let maxValueAsString = localStorage.getItem('MaxValue')
+    if (maxValueAsString) {
+      let newValue = JSON.parse(maxValueAsString)
+      //parse - парсим обратно в {} либо [] (преобразования JSON обратно в объект)
+      setMaxValue(newValue)
+    }
 
-  // const setHandler = () => {
-  //   setMaxValue(maxValue + 1)
-  // }
+    let startValueAsString = localStorage.getItem('StartValue')
+    if (startValueAsString) {
+      let newValue = JSON.parse(startValueAsString)
+      setStartValue(newValue)
+      setCounter(newValue)
+    }
+  }, [])
 
-  // const setHandler = (e: ChangeEvent<HTMLInputElement>) => setMaxValue(e.currentTarget.value)
+  let [isDis, setIsDis] = useState(false)
 
+  const countMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
+    const changeMaxValue = Number(e.currentTarget.value)
+    if (changeMaxValue < 0) {
+      return setError('Incorrect value!')
+    }
+    setMaxValue(changeMaxValue)
+    setIsDis(false)
+    setIsCounter(false)
+  }
+
+  const countStartValue = (e: ChangeEvent<HTMLInputElement>) => {
+    const changeStartValue = Number(e.currentTarget.value)
+    if (changeStartValue < 0) {
+      return setError('Incorrect value!')
+    }
+    setStartValue(changeStartValue)
+    setIsDis(false)
+    setIsCounter(false)
+  }
+
+  const setHandler = () => {
+    localStorage.setItem('MaxValue', JSON.stringify(maxValue))
+    //stringify - приводим к строке (преобразования объектов в JSON)
+    localStorage.setItem('StartValue', JSON.stringify(startValue))
+    setCounter(startValue)
+    setIsCounter(true)
+    setIsDis(true)
+  }
 
   return (
     <div className={s.wrapper__left}>
@@ -24,22 +70,33 @@ export const CounterValue = () => {
           <li>max value:
             <input
               type="number"
+              onChange={countMaxValue}
               value={maxValue}
             />
           </li>
           <li>start value:
             <input
               type="number"
+              onChange={countStartValue}
               value={startValue}
             />
           </li>
         </div>
       </div>
       <div className={s.form__bottom__left}>
-        <div className={s.set}>
-          {/*onClick={setHandler}*/}
-          set
+        <div className={s.button__set}>
+          <Button disabled={isDis}
+                  onClick={setHandler}>
+            set
+          </Button>
         </div>
+
+        {/*<div className={s.set}
+             onClick={setHandler}
+        >
+          set
+        </div>*/}
+
       </div>
     </div>
   )

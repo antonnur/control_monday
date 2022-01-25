@@ -1,5 +1,5 @@
 .wrapper__left {
-    margin: 100px 0 0 280px;
+    margin: auto;
 
     width: 350px;
     height: 250px;
@@ -54,7 +54,7 @@
     border-radius: 5px;
 }
 
-.set {
+.button {
     width: 100px;
     height: 40px;
 
@@ -70,4 +70,12 @@
 
     user-select: none;
     /*выделение текста при клике*/
+}
+
+.button:disabled {
+    background: rgba(174, 210, 30, 0.3);
+}
+
+.button__set{
+    margin: auto;
 }
