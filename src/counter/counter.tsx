@@ -1,4 +1,4 @@
-import React, {FC, useState} from "react";
+import React, {FC} from "react";
 import s from './counter.module.css'
 import {Button} from "../button/button";
 
@@ -36,17 +36,8 @@ export const Counter: FC<PropsType> = (props) => {
             inc
           </Button>
         </div>
-        {/*<button className={counter === maxValue ? s.button__disable : s.inc}
-                disabled={error ? true : false}
-                onClick={() => {
-                  if (counter < maxValue) {
-                    setCounter(counter + 1)
-                  }
-                }}>
-          inc
-        </button>*/}
         <div className={s.button__reset}>
-          <Button disabled={error ? true : false || !isCounter}
+          <Button disabled={!!error || !isCounter}   // !!error или error ? true : false
                   onClick={() => {
                     if (counter <= maxValue) {
                       setCounter(startValue)
@@ -55,16 +46,6 @@ export const Counter: FC<PropsType> = (props) => {
             reset
           </Button>
         </div>
-        {/*<button className={s.reset}
-                disabled={error ? true : false}
-                onClick={() => {
-                  if (counter <= maxValue) {
-                    setCounter(startValue)
-                  }
-                }}>
-          reset
-        </button>*/}
-
       </div>
     </div>
   )

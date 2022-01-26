@@ -1,4 +1,4 @@
-import s from "../counter-value/counter-value.module.css";
+import s from "../counter-value/counter-setting.module.css";
 import React, {FC, MouseEvent} from "react";
 
 type PropsType = {

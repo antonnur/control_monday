@@ -1,6 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
-import s from './counter-value.module.css'
-import {Counter} from "../counter/counter";
+import s from './counter-setting.module.css'
 import {Button} from "../button/button";
 
 type PropsType = {
@@ -8,16 +7,15 @@ type PropsType = {
   setMaxValue: (value: number) => void
   startValue: number
   setStartValue: (value: number) => void
-  counter: number
   setCounter: (value: number) => void
   setIsCounter: (value: boolean) => void
   setError: (value: string | null) => void
 }
 
-export const CounterValue: React.FC<PropsType> = ({startValue, maxValue, setMaxValue, setStartValue, setCounter, counter, setIsCounter, setError}) => {
+export const CounterSetting: React.FC<PropsType> = ({startValue, maxValue, setMaxValue, setStartValue, setCounter, setIsCounter, setError}) => {
 
   useEffect(() => {
-    let maxValueAsString = localStorage.getItem('MaxValue')
+    let maxValueAsString = localStorage.getItem('MaxValue') //получаем JSON строку
     if (maxValueAsString) {
       let newValue = JSON.parse(maxValueAsString)
       //parse - парсим обратно в {} либо [] (преобразования JSON обратно в объект)
@@ -30,7 +28,7 @@ export const CounterValue: React.FC<PropsType> = ({startValue, maxValue, setMaxV
       setStartValue(newValue)
       setCounter(newValue)
     }
-  }, [])
+  },[])
 
   let [isDis, setIsDis] = useState(false)
 
@@ -90,13 +88,6 @@ export const CounterValue: React.FC<PropsType> = ({startValue, maxValue, setMaxV
             set
           </Button>
         </div>
-
-        {/*<div className={s.set}
-             onClick={setHandler}
-        >
-          set
-        </div>*/}
-
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Counter} from "./counter/counter";
-import {CounterValue} from "./counter-value/counter-value";
+import {CounterSetting} from "./counter-value/counter-setting";
 
 function App() {
   let [counter, setCounter] = useState<number>(0)
@@ -21,13 +21,12 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <CounterValue
+        <CounterSetting
           setIsCounter={setIsCounter}
           maxValue={maxValue}
           setMaxValue={setMaxValue}
           startValue={startValue}
           setStartValue={setStartValue}
-          counter={counter}
           setCounter={setCounter}
           setError={setError}/>
         <Counter
